@@ -12,6 +12,12 @@ exec dbus-launch --exit-with-session startxfce4
 STARTUP
 chmod +x "$HOME/.vnc/xstartup"
 
+# Restore the VNC password after a container rebuild if needed.
+if [ ! -s "$HOME/.vnc/passwd" ] && [ -s /workspaces/.codespace-secrets/vnc-passwd ]; then
+  cp /workspaces/.codespace-secrets/vnc-passwd "$HOME/.vnc/passwd"
+  chmod 600 "$HOME/.vnc/passwd"
+fi
+
 # A VNC password must be configured before starting the desktop.
 if [ ! -s "$HOME/.vnc/passwd" ]; then
   echo "VNC password missing. Run: vncpasswd"
@@ -20,6 +26,7 @@ fi
 
 # Start VNC only if display :1 is not already running.
 if ! pgrep -f '^/usr/bin/Xtigervnc :1 ' >/dev/null; then
+  rm -f /tmp/.X11-unix/X1 /tmp/.X1-lock "$HOME/.vnc/"*":1.pid"
   vncserver :1 -localhost yes -geometry 1366x768 -depth 24
 fi
 

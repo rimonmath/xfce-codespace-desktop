@@ -4,7 +4,7 @@
     "dockerfile": "../Dockerfile",
     "context": ".."
   },
-  "postStartCommand": "bash .devcontainer/start-desktop.sh",
+  "postStartCommand": "bash .devcontainer/start-desktop.sh 2>&1 | tee -a /tmp/desktop-startup.log",
   "forwardPorts": [6080],
   "portsAttributes": {
     "6080": {
