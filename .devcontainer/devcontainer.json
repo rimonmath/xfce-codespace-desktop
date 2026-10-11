@@ -1,0 +1,16 @@
+{
+  "name": "XFCE Desktop with noVNC",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": ".."
+  },
+  "postStartCommand": "bash .devcontainer/start-desktop.sh",
+  "forwardPorts": [6080],
+  "portsAttributes": {
+    "6080": {
+      "label": "XFCE Desktop (noVNC)",
+      "onAutoForward": "notify",
+      "visibility": "private"
+    }
+  }
+}
