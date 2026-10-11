@@ -8,6 +8,7 @@ RUN apt-get update \
         xfce4-terminal \
         tigervnc-standalone-server \
         tigervnc-common \
+          tigervnc-tools \
         novnc \
         websockify \
         dbus-x11 \
