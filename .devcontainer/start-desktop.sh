@@ -32,7 +32,7 @@ fi
 
 # Start noVNC only if port 6080 is not already listening.
 if ! ss -ltn | grep -q ':6080'; then
-  nohup /usr/share/novnc/utils/novnc_proxy \
+  setsid /usr/share/novnc/utils/novnc_proxy \
     --listen 0.0.0.0:6080 \
     --vnc localhost:5901 \
     > "$HOME/.vnc/novnc.log" 2>&1 < /dev/null &
